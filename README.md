@@ -1,1 +1,3 @@
-use catkin_make to build this repository..
+use 
+
+catkin_make -DCMAKE_C_COMPILER=gcc-8 -DCMAKE_CXX_COMPILER=g++-8 
