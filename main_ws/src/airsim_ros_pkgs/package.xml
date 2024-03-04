@@ -24,6 +24,8 @@
   <build_depend>geographic_msgs</build_depend>
   <build_depend>geometry_msgs</build_depend>
   <build_depend>tf2_sensor_msgs</build_depend>
+  <build_depend>octomap_server</build_depend>
+  <depend>uav_utils</depend>
 
 
   <!-- <exec_depend>nodelet</exec_depend> -->
@@ -37,6 +39,8 @@
   <exec_depend>sensor_msgs</exec_depend>
   <exec_depend>std_msgs</exec_depend>
   <exec_depend>joy</exec_depend>
+  <exec_depend>octomap_server</exec_depend>
+  
 
 <!--   <export>
     <nodelet plugin="${prefix}/nodelet_plugins.xml" />

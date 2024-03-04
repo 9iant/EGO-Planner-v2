@@ -1,21 +1,25 @@
 cmake_minimum_required(VERSION 3.10.0)
 project(airsim_ros_pkgs)
 
+set(CMAKE_BUILD_TYPE "Release")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -g")
+
+
+
 # set this to path to AirSim root folder if you want your catkin workspace in a custom directory
-set(AIRSIM_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/../thirdparty)
+set(AIRSIM_ROOT ${PROJECT_SOURCE_DIR}/../thirdparty)
 
 add_subdirectory("${AIRSIM_ROOT}/cmake/rpclib_wrapper" rpclib_wrapper)
 add_subdirectory("${AIRSIM_ROOT}/cmake/AirLib" AirLib)
 add_subdirectory("${AIRSIM_ROOT}/cmake/MavLinkCom" MavLinkCom)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -Wstrict-null-sentinel -Wno-unused")
+set(CMAKE_CXX_STANDARD 11)
 set(CXX_EXP_LIB "-nostdinc++ -I/usr/include/c++/8 -I/usr/include/x86_64-linux-gnu/c++/8 -nodefaultlibs 
 -l/usr/lib/x86_64-linux-gnu/libc++.so -l/usr/lib/x86_64-linux-gnu/libc++abi.so
 -lm -lc -lgcc_s -lgcc  
--lstdc++fs -fmax-errors=10")
+-lstdc++fs -fmax-errors=10 -Wnoexcept -Wstrict-null-sentinel") 
 
-set(RPC_LIB_INCLUDES " ${AIRSIM_ROOT}/external/rpclib/rpclib-2.3.0/include")
+set(RPC_LIB_INCLUDES " ${AIRSIM_ROOT}/external/rpclib/rpclib-2.2.1/include")
 set(RPC_LIB rpc) # name of .a file with lib prefix
 message(STATUS "found RPC_LIB_INCLUDES=${RPC_LIB_INCLUDES}")
 
@@ -23,6 +27,7 @@ message(STATUS "found RPC_LIB_INCLUDES=${RPC_LIB_INCLUDES}")
 # find_package(Eigen3 REQUIRED) 
 find_package(Boost REQUIRED)
 find_package(OpenCV REQUIRED)
+find_package(PCL REQUIRED)
 
 find_package(catkin REQUIRED COMPONENTS
   cv_bridge
@@ -33,6 +38,9 @@ find_package(catkin REQUIRED COMPONENTS
   # nodelet
   roscpp
   rospy
+  octomap_ros
+  octomap_msgs
+  octomap_server
   sensor_msgs
   std_msgs
   geographic_msgs
@@ -41,8 +49,11 @@ find_package(catkin REQUIRED COMPONENTS
   tf2
   tf2_ros
   tf2_sensor_msgs
-  tf2_geometry_msgs
+  visualization_msgs
+  geometry_msgs 
+  uav_utils
 )
+find_package(octomap REQUIRED)
 
 add_message_files(
   FILES
@@ -84,12 +95,15 @@ catkin_package(
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
+  ${AIRSIM_ROOT}/AirLib/deps/eigen3
   ${AIRSIM_ROOT}/AirLib/include
   ${RPC_LIB_INCLUDES}
   ${AIRSIM_ROOT}/MavLinkCom/include
   ${AIRSIM_ROOT}/MavLinkCom/common_utils
   ${OpenCV_INCLUDE_DIRS}
   ${Boost_INCLUDE_DIRS}
+  ${PCL_INCLUDE_DIRS}
+  ${OCTOMAP_INCLUDE_DIRS}
 )
 
 add_library(airsim_settings_parser src/airsim_settings_parser.cpp)
@@ -105,6 +119,10 @@ target_link_libraries(airsim_ros ${catkin_LIBRARIES} ${OpenCV_LIBS} yaml-cpp Air
 
 add_executable(airsim_node src/airsim_node.cpp)
 target_link_libraries(airsim_node airsim_ros ${catkin_LIBRARIES} AirLib)
+
+add_executable(airsim_map_node src/airsim_map_node.cpp)
+target_link_libraries(airsim_map_node airsim_ros ${catkin_LIBRARIES} AirLib ${PCL_LIBRARIES} ${OCTOMAP_LIBRARIES})
+
 
 add_executable(pd_position_controller_simple_node src/pd_position_controller_simple_node.cpp)
 target_link_libraries(pd_position_controller_simple_node pd_position_controller_simple airsim_ros ${catkin_LIBRARIES} AirLib)
