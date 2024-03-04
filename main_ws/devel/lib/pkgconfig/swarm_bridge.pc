@@ -1,8 +1,0 @@
-prefix=/workspace/EGO-Planner-v2/main_ws/devel
-
-Name: swarm_bridge
-Description: Description of swarm_bridge
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: traj_utils

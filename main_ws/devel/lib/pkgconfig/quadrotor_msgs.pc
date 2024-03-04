@@ -1,8 +1,0 @@
-prefix=/workspace/EGO-Planner-v2/main_ws/devel
-
-Name: quadrotor_msgs
-Description: Description of quadrotor_msgs
-Version: 0.0.0
-Cflags: -I/workspace/EGO-Planner-v2/main_ws/devel/include
-Libs: -L${prefix}/lib -lencode_msgs -ldecode_msgs
-Requires: message_runtime

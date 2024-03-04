@@ -1,8 +1,0 @@
-prefix=/workspace/EGO-Planner-v2/main_ws/devel
-
-Name: mockamap
-Description: Description of mockamap
-Version: 0.1.0
-Cflags: -I/workspace/EGO-Planner-v2/main_ws/src/uav_simulator/mockamap/include
-Libs: -L${prefix}/lib 
-Requires: roscpp pcl_ros pcl_conversions
