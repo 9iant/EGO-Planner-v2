@@ -1,0 +1,33 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/workspace/dynablox_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/workspace/dynablox_ws/src/dynablox/drift_simulation/include/**",
+        "/workspace/dynablox_ws/src/dynablox/dynablox/include/**",
+        "/workspace/dynablox_ws/src/dynablox/dynablox_ros/include/**",
+        "/workspace/dynablox_ws/src/eigen_checks/include/**",
+        "/workspace/dynablox_ws/src/lidar_undistortion/lidar_undistortion/include/**",
+        "/workspace/dynablox_ws/src/minkindr/minkindr/include/**",
+        "/workspace/dynablox_ws/src/minkindr_ros/minkindr_conversions/include/**",
+        "/workspace/dynablox_ws/src/numpy_eigen/include/**",
+        "/workspace/dynablox_ws/src/ouster-ros/include/**",
+        "/workspace/dynablox_ws/src/voxblox/voxblox/include/**",
+        "/workspace/dynablox_ws/src/voxblox/voxblox_ros/include/**",
+        "/workspace/dynablox_ws/src/voxblox/voxblox_rviz_plugin/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
