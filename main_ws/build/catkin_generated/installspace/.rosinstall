@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /workspace/EGO-Planner-v2/main_ws/install/setup.sh

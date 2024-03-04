@@ -1,0 +1,8 @@
+prefix=/workspace/EGO-Planner-v2/main_ws/devel
+
+Name: traj_utils
+Description: Description of traj_utils
+Version: 0.0.0
+Cflags: -I/workspace/EGO-Planner-v2/main_ws/devel/include -I/workspace/EGO-Planner-v2/main_ws/src/planner/traj_utils/include
+Libs: -L${prefix}/lib -ltraj_utils
+Requires: message_runtime
