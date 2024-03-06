@@ -6,10 +6,10 @@
     <arg name="map_size_x" value="100"/>
     <arg name="map_size_y" value="50"/>
     <arg name="map_size_z" value="3.0"/>
-    <arg name="odom_topic" value="/airsim_node/drone_1/odom_local_enu"/>
+    <arg name="odom_topic" value="/mavros/local_position/odom"/>
     
     <!-- main algorithm params -->
-    <include file="$(find ego_planner)/launch/advanced_param_airsim.xml">
+    <include file="$(find ego_planner)/launch/include/advanced_param_airsim.xml">
         <arg name="drone_id" value="$(arg drone_id)"/>
         <arg name="map_size_x_" value="$(arg map_size_x)"/>
         <arg name="map_size_y_" value="$(arg map_size_y)"/>
@@ -20,15 +20,15 @@
         <!-- depth topic: depth image, 640x480 by default -->
         <!-- don't set cloud_topic if you already set these ones! -->
         <arg name="camera_pose_topic" value="nouse1"/>
-        <arg name="depth_topic" value="/airsim_node/drone_1/front_center_custom/DepthPerspective"/>
+        <arg name="depth_topic" value="/airsim_node/drone1/front_center/DepthPlanar"/>
         <!-- topic of point cloud measurement, such as from LIDAR  -->
         <!-- don't set camera pose and depth, if you already set this one! -->
         <arg name="cloud_topic" value="nouse2"/>
         <!-- intrinsic params of the depth camera -->
-        <arg name="cx" value="336.0"/>
-        <arg name="cy" value="188.0"/>
-        <arg name="fx" value="336.0"/>
-        <arg name="fy" value="336.0"/>
+        <arg name="cx" value="320.0"/>
+        <arg name="cy" value="240.0"/>
+        <arg name="fx" value="320.0"/>
+        <arg name="fy" value="320.0"/>
         <!-- maximum velocity and acceleration the drone will reach -->
         <arg name="max_vel" value="0.5" />
         <arg name="max_acc" value="6.0" />
@@ -37,7 +37,7 @@
         <arg name="use_distinctive_trajs" value="false" />
         <!-- 1: use 2D Nav Goal to select goal  -->
         <!-- 2: use global waypoints below  -->
-        <arg name="flight_type" value="1" />
+        <arg name="flight_type" value="2" />
         <!-- global waypoints -->
         <!-- It generates a piecewise min-snap traj passing all waypoints -->
         <arg name="point_num" value="1" />
