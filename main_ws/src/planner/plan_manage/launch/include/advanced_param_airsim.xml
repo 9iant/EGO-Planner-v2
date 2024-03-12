@@ -7,12 +7,14 @@
   <arg name="camera_pose_topic"/>
   <arg name="depth_topic"/>
   <arg name="cloud_topic"/>
-
+  <arg name="grid_map/frame_id"/>
+  <arg name="grid_map/odom_depth_timeout"/>
+  
   <arg name="cx"/>
   <arg name="cy"/>
   <arg name="fx"/>
   <arg name="fy"/>
-
+  
   <arg name="max_vel"/>
   <arg name="max_acc"/>
   <arg name="planning_horizon"/>
@@ -120,7 +122,9 @@
     <param name="grid_map/visualization_truncate_height"   value="1.8"/>
     <param name="grid_map/show_occ_time"  value="false"/>
     <param name="grid_map/pose_type"     value="2"/>  
-    <param name="grid_map/frame_id"      value="map"/>
+    <param name="grid_map/frame_id"      value="$(arg grid_map/frame_id)"/>
+    <!-- safty -->
+    <param name="grid_map/odom_depth_timeout" value="$(arg grid_map/odom_depth_timeout)"/>
 
   <!-- planner manager -->
     <param name="manager/max_vel" value="$(arg max_vel)" type="double"/>

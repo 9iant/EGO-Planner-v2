@@ -2,7 +2,7 @@
     <arg name="map_size_x" value="200.0"/>
     <arg name="map_size_y" value="200.0"/>
     <arg name="map_size_z" value=" 3.0"/>
-    <arg name="odom_topic" value="visual_slam/odom" />
+    <arg name="odom_topic" value="/mavros/local_postion/odom" />
 
     <!-- map -->
     <node pkg ="map_generator" name ="random_forest" type ="random_forest" output = "screen">
@@ -50,5 +50,7 @@
         <arg name="target3_y" default="0.0"/>
         <arg name="target3_z" default="1.0"/>
     </include>
+
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find ego_planner)/launch/include/default.rviz" required="true" />
 </launch>
 

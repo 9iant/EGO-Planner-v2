@@ -1,0 +1,19 @@
+<launch>
+  <!-- 깊이 이미지와 관련된 정보를 포함하는 토픽 이름을 정의합니다 -->
+  <arg name="depth_registered_topic" default="/airsim_node/drone1/front_center/DepthPlanar"/>
+  <arg name="camera_info_topic" default="/airsim_node/drone1/front_center/DepthPlanar/camera_info"/>
+
+  <!-- point_cloud_xyz nodelet을 로드하기 위한 nodelet manager를 실행합니다 -->
+  <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" output="screen"/>
+
+  <!-- depth_image_proc의 point_cloud_xyz nodelet을 실행합니다 -->
+  <node pkg="nodelet" type="nodelet" name="point_cloud_xyz"
+        args="load depth_image_proc/point_cloud_xyz nodelet_manager">
+    <!-- 입력 깊이 이미지와 카메라 정보 토픽을 정의합니다 -->
+    <remap from="depth_registered/image_raw" to="$(arg depth_registered_topic)"/>
+    <remap from="depth_registered/camera_info" to="$(arg camera_info_topic)"/>
+    
+    <!-- 출력 포인트 클라우드 토픽을 정의합니다 -->
+    <remap from="points" to="/points"/>
+  </node>
+</launch>
